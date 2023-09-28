@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+.login{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-image: url('../../public/background.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  border: 3px black solid;
+  min-height: 95vh;
+  }
+
+.login-container{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: 2px pink solid; */
+
+}
+
+

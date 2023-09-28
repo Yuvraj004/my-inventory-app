@@ -1,27 +1,6 @@
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-.lock-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 18rem;
-  margin-top: -70px;
-  /* border: 2px solid #333; */
-}
-.lock {
-  width: 100px;
-  height: 200px;
-  border: 2px solid #333;
-  border-radius: 10px;
-  background-color: #f4f4f4;
-  text-align: center;
-  padding: 20px 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 100%;
-}
+

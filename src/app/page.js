@@ -1,57 +1,56 @@
 "use client";
-import Image from 'next/image'
-import styles from './page.module.css'
-import lock from "../../public/lockAdd.png";
-import connectTo from '@/utils/db';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import './page.css';
+
 export default function Home() {
-  const [i, seti] = useState(0);
-  const [j, setj] = useState(1);
-  const [k, setk] = useState(2);
+  const randomInti = Math.floor(Math.random() * 10);
+  const randomIntj = Math.floor(Math.random() * 10);
+  const randomIntk = Math.floor(Math.random() * 10);
+  const [i, seti] = useState(randomInti);
+  const [j, setj] = useState(randomIntj);
+  const [k, setk] = useState(randomIntk);
+  const [pause, setpause] = useState(0);
+  const [animate, setAnimate] = useState(false);
+
+  const router = useRouter();
+
   useEffect(() => {
     const interval = setInterval(() => {
-      seti(prevCount => {
-        if (prevCount < 9) {
-          return prevCount + 1;
-        } else {
-          return prevCount=0; // Ensure the count stays at 10 after reaching it
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 50);
+
+      seti(prevCount => (prevCount < 9 ? prevCount + 1 : 0));
+      setj(prevCount => (prevCount < 9 ? prevCount + 1 : 0));
+      setk(prevCount => (prevCount < 9 ? prevCount + 1 : 0));
+      setpause(prevCount => {
+        if (prevCount < 15) return prevCount + 1;
+        else {
+          clearInterval(interval);
+          router.push('/components/login');
         }
       });
-    // Change the interval (in milliseconds) as per your preference
-    setj(prevCount => {
-      if (prevCount < 9) {
-        return prevCount + 1;
-      } else {
-        return prevCount=0;// Ensure the count stays at 10 after reaching it
-      }
-    });
-    setk(prevCount => {
-      if (prevCount < 9) {
-        return prevCount + 1;
-      } else {
-        return prevCount=0;
-         // Ensure the count stays at 10 after reaching it
-      }
-    });
-      
-    }, 100); 
-    return () => clearInterval(interval); // Clean up the interval on component unmount
-  }, []); 
-  return (
+    }, 100);
 
-    <main className={styles.main}>
-      <p>LOADING YOUR INVENTORY</p>
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <main className="main">
+      <div className='container'>
+        <p>LOADING YOUR INVENTORY.....</p>
         <div className="lock-container">
           <div className="lock">
-            {i}
+            <h1 className={`${typeof window !== 'undefined' && animate ? 'slide-up-enter' : ''}`}>{i}</h1>
           </div>
           <div className="lock">
-            {j}
+            <h1 className={`${typeof window !== 'undefined' && animate ? 'slide-up-enter' : ''}`}>{j}</h1>
           </div>
           <div className="lock">
-            {k}
+            <h1 className={`${typeof window !== 'undefined' && animate ? 'slide-up-enter' : ''}`}>{k}</h1>
           </div>
         </div>
+      </div>
     </main>
-  )
+  );
 }
