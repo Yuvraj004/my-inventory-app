@@ -1,12 +1,17 @@
-import { MongoClient } from 'mongodb';
+import mongoose from "mongoose";
+const mongoURI = "mongodb+srv://yuvrajchat:jvs30vubqU00wuq3@cluster0.yjrktkq.mongodb.net/?retryWrites=true&w=majority";
 
-const uri = 'mongodb+srv://yuvrajchat:jvs30vubqU00wuq3@cluster0.yjrktkq.mongodb.net/?retryWrites=true&w=majority';
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+async function connectTo() {
+  mongoose.connect(mongoURI)
+    .then(() => {
+      console.log("Connected to MongoDB successfully");
+    })
+    .catch((error) => {
+      console.error("Failed to connect to MongoDB", error);
+    });
 
-async function connect() {
-  await client.connect();
-  const database = client.db('inventory_management');
-  return database;
+  const db = mongoose.connection;
+  db.on("error", console.error.bind(console, "MongoDB connection error:"));
 }
 
-export { connect };
+export default connectTo;
