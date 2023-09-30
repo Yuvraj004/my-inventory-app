@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import './page.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 export default function Home() {
   const randomInti = Math.floor(Math.random() * 10);

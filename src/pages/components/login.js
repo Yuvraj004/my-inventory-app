@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import bck from "../../../public/background.jpg";
 import Image from 'next/image';
 import "../../styles/login.css";
+import Link from 'next/link';
+import '@fortawesome/fontawesome-free/css/all.css';
+import img from "../../../public/img-01.png";
+
 const login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,24 +17,36 @@ const login = () => {
   };
   return (
     <div className='login'>
-      <Image src={bck} alt='back' />
       <div className='wrapper'>
+        <div style={{ "will-change": "transform","transform": "perspective(300px) rotateX(0deg) rotateY(0deg)"}}>
+          <Image src={img} alt='back' width="400" />
+        </div>
+        
         <div className='container'>
-          <span className='title'>Login Form</span>
+          <span className='title'><h2><b>Member Login</b></h2></span>
           <form action="#">
-            <div className='row'>
-              <i className='fas fa-user'></i>
-              <input type='text' placeholder='Email'/>
+            <div className='row' data-validate="input is required">
+              <span className='symbol'>
+                <i className='fas fa-user'></i>
+              </span>
+              <input className="input_field" type='text' placeholder='Email' />
+
             </div>
             <div className='row'>
-              <input type='password' placeholder='password'/>
+              <span className='symbol'>
+                <i className='fas fa-lock'></i>
+              </span>
+              <input className="input_field" type='Password' placeholder='password' />
             </div>
             <div className='row'>
-              <input type='password' placeholder='Confirmpassword'/>
+              <span className='symbol'>
+                <i className='fas fa-lock'></i>
+              </span>
+              <input className="input_field" type='password' placeholder='Confirm_Password' />
             </div>
-            <div className='row'>
-              <input type='submit' value="Login"/>
-              <div className='pass'><a href="#">Forgot Password</a></div>
+            <div className='row sub'>
+              <input className='button' type='submit' value="Login" />
+              <Link href="/components/register" style={{ textDecoration: 'none' }}>Create Account</Link>
             </div>
 
           </form>

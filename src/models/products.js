@@ -5,6 +5,8 @@ const ProductSchema = new mongoose.Schema({
   description: String,
   price: Number,
   quantity: Number,
+  approved: { type: Boolean, default: false },
+  vendorReviewed: { type: mongoose.Schema.Types.ObjectId, ref: 'Vendor' },
   vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'Vendor' },
   createdAt: { type: Date, default: Date.now }
 });

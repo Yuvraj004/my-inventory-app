@@ -1,9 +1,9 @@
-import connectTo from '../../../utils/db';
+import connectToDatabase from '../../../utils/db';
 import User from '../../../models/users';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
-  connectTo();
+  connectToDatabase();
   if (req.method === 'POST') {
     try {
       const newUser = new User(req.body);

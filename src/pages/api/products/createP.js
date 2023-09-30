@@ -1,8 +1,9 @@
-import connect from '../../../utils/db';
+import connectToDatabase from '../../../utils/db';
 import Product from '../../../models/products';
+import { authMiddleware } from '../../../utils/auth';
 
-const createProduct =  async (req, res) => {
-  await connect();
+const createProduct = authMiddleware(async (req, res) => {
+  await connectToDatabase();
 
   if (req.method === 'POST') {
     try {
@@ -15,6 +16,6 @@ const createProduct =  async (req, res) => {
   } else {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
-};
+});
 
 export default createProduct;

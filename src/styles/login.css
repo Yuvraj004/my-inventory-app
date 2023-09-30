@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css?family=Young+Serif');
+.body{
+  font-family: 'Young Serif', Regular;
+}
 .login{
   display: flex;
   flex-direction: row;
@@ -7,16 +11,94 @@
   background-image: url('../../public/background.jpg');
   background-size: cover; 
   background-repeat: no-repeat;
-  border: 3px black solid;
-  min-height: 95vh;
+  height: 100vh;
+  width: 100vw;
   }
-
-.login-container{
+.wrapper{
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(254, 254, 254);
+  width: 70vw;
+  height: 90vh;
+  border-radius: 10px;
+}
+.container{
+  
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  /* border: 2px pink solid; */
+  height:60vh;
+  width: 30vw;
+}
+.sub{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius : 20% ;
+  border: none;
 
 }
+.symbol{
+  margin-right: 20px;
+}
+.input_field{
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666;
+  display: block;
+  width: 100%;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 0px 0 50px;
+  border: none;
+}
+.button{
+  font-family: Montserrat-Bold;
+  border: none;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background: #57b846;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+  -webkit-transition: all .4s;
+  transition: all .4s;
+  margin-bottom: 20px;
+  border: none;
+}
 
+.input_field:active,.input_field:hover {
+  /* border-color: #57b846; */
+  box-shadow: 0 0 50px rgba(90, 202, 25, 1);
+  transform: scaleX(110%);
+}
+.row:hover .symbol,
+.row:active .symbol {
+  position: relative;
+  left: -5%;
+  margin-right: 20px;
+}
 
+.button:active,.button:hover{
+  background-color: #070d06;
+}
