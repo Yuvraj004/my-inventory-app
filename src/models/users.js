@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   role: String,
   createdAt: { type: Date, default: Date.now },
-  purchasedProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+  selectedProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
   trackedProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
 });

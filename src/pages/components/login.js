@@ -21,17 +21,11 @@ const login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      toast.error('Please enter a valid email address',{
-      });
-      window.location.reload();
-      // return;
-    }
     if(formData.password !== formData.confirmPass) {
       toast.error("Password & Confirm Password are not same!!");
       return;
     }
+    // console.log(formData.username);
     try {
       const response = await fetch('/api/users/login', {
         method: 'POST',
@@ -39,14 +33,13 @@ const login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(
-          formData.username,
-          formData.password
+          formData
         ),
       });
 
       if (response.ok) {
         toast.success('Login successful!');
-        router.push('/components/products/buyProduct');
+        router.push('/mainpage');
       } else {
         const data = await response.json();
         toast.error(`Login failed: ${data.message}`);
@@ -78,7 +71,6 @@ return (
               onChange={handleChange}
               required
             />
-
           </div>
           <div className='row'>
             <span className='symbol'>
