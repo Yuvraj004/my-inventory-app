@@ -1,8 +1,8 @@
-import connectTo from '../../../utils/db';
+import connectToDatabase from '../../../utils/db';
 import Vendor from '../../../models/vendors';
 
 const creatVendor = async (req, res) => {
-  connectTo();
+  connectToDatabase();
 
   if (req.method === 'POST') {
     try {

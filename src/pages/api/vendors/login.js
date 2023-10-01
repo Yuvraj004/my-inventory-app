@@ -8,7 +8,7 @@ export default async (req, res) => {
   if (req.method === 'POST') {
     try {
       const { username, password } = req.body;
-
+      console.log(username,password);
       const vendor = await Vendor.findOne({ username });
 
       if (!vendor) {

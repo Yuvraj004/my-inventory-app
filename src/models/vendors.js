@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 
 const VendorSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  address: String,
+  username: { type: String, unique: true },
+  email:{ type: String, unique: true },
+  password: String,
+  role: String,
+  uploadedProducts :[{ type: mongoose.Schema.Types.ObjectId, ref: 'Product'}],
   createdAt: { type: Date, default: Date.now }
 });
 
