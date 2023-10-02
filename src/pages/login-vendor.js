@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
-import "../../styles/login.css";
+import "../styles/login.css";
 import Link from 'next/link';
 import '@fortawesome/fontawesome-free/css/all.css';
-import img from "../../../public/img-01.png";
+import img from "../../public/img-01.png";
 import { useRouter } from 'next/router';
 import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
+import { ToastContainer,toast } from 'react-toastify';
 
 const login = () => {
   const router = useRouter();
@@ -21,12 +21,12 @@ const login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      toast.error('Please enter a valid email address');
-      window.location.reload();
-      return;
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // if (!emailRegex.test(formData.email)) {
+    //   toast.error('Please enter a valid email address');
+    //   window.location.reload();
+    //   return;
+    // }
     if(formData.password !== formData.confirmPass) {
       toast.error("Password & Confirm Password are not same!!");
     }
@@ -37,12 +37,19 @@ const login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(
-          formData.username,
-          formData.password
+          formData
         ),
       });
 
       if (response.ok) {
+        const data = await response.json();
+        let vendor = await data.vendor;
+        const token = data.token;
+        toast.success('Login successful!');
+        if (typeof window !== 'undefined' && window.localStorage) {
+          localStorage.setItem('userId',vendor._id);
+          localStorage.setItem('token', token);
+        }
         toast.success('Login successful!');
         router.push('/components/vendor/VendorDashboard');
       } else {
@@ -56,6 +63,7 @@ const login = () => {
   return (
     <div className='login'>
       <div className='wrapper'>
+        <ToastContainer/>
         <div >
           <Image src={img} alt='back' width="400" />
         </div>

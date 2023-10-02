@@ -3,10 +3,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { getVendorProducts, createProduct, deleteProduct, reviewUserSelectedProduct } from './vendorApi';
+import '../../../styles/userProf.css';
+import '../../../styles/vendorDash.css';
 
 const VendorDashboard = () => {
   const [products, setProducts] = useState([]);
-  const [newProductData, setNewProductData] = useState({});
+  const [newProductData, setNewProductData] = useState({
+    name: '',
+    description: '',
+    price: 0,
+    quantity: 0,
+  });
   const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
@@ -37,36 +44,61 @@ const VendorDashboard = () => {
   };
 
   return (
-    <div>
+    <div style={{display:"flex",alignItems:"center",flexDirection:"column"}}>
       <h2>Vendor Dashboard</h2>
-      <div>
+      <div className='createProduct'>
         <h3>Create New Product</h3>
-        <input
-          type="text"
-          placeholder="Product Name"
-          onChange={(e) => setNewProductData({ ...newProductData, name: e.target.value })}
-        />
-        {/* Add more input fields for other product details */}
-        <button onClick={handleCreateProduct}>Create Product</button>
+        <div className='inputGroup'>
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={newProductData.name}
+            onChange={(e) => setNewProductData({ ...newProductData, name: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Description"
+            value={newProductData.description}
+            onChange={(e) => setNewProductData({ ...newProductData, description: e.target.value })}
+          />
+          <label> Price
+            <input
+              type="number"
+              placeholder="Price"
+              value={newProductData.price}
+              onChange={(e) => setNewProductData({ ...newProductData, price: e.target.value })}
+            />
+          </label>
+          <label> Quantity
+            <input
+              type="number"
+              placeholder="Quantity"
+              value={newProductData.quantity}
+              onChange={(e) => setNewProductData({ ...newProductData, quantity: e.target.value })}
+            />
+          </label>
+        </div>
+        <button className='btn' onClick={handleCreateProduct}>Create Product</button>
       </div>
-      <div>
-        <h3>My Products</h3>
+      <h3>My Products</h3>
+      <div className='productList'>
         {products && products.map((product) => (
-          <div key={product._id}>
-            <span>{product.name}</span>
+          <div className='productCard' key={product._id}>
+            <p>{product.name}</p>
             <button onClick={() => handleDeleteProduct(product._id)}>Delete</button>
           </div>
         ))}
       </div>
       <h3>Products to be approved</h3>
-      {products && products.map((product) => {
+      <div className='productList' >
+        {products && products.map((product) => {
           // Check if the product is not approved
           if (!product.approved) {
             return (
-              <div key={product._id}>
+              <div className='productCard' key={product._id}>
                 <p>{product.name}</p>
                 <p>{product.descrption}</p>
-                <div>
+                <div >
                   {products.users && product.users.map((user) => (
                     <label key={user._id}>
                       <input
@@ -80,14 +112,14 @@ const VendorDashboard = () => {
                     </label>
                   ))}
                 </div>
-                <button onClick={() => handleReviewProduct(product._id,product.approved)}>Approve</button>
+                <button onClick={() => handleReviewProduct(product._id, product.approved)}>Approve</button>
               </div>
             );
           } else {
             return null; // Return null if the product is already approved
           }
-      })}
-
+        })}
+      </div>
     </div>
   );
 };

@@ -23,14 +23,12 @@ export default async (req, res) => {
       }
       // console.log(4);
       const token = generateToken(user);
-      // Store the token in session storage
-      // Note: Make sure this code is executed on the client side
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('token', token);
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem('token', token);
       }
-      console.log(`token:${token}`);
+      // console.log(`token:${token}`);
       // console.log(5);
-      return res.status(200).json({ success: true, token });
+      return res.status(200).json({ success: true, token,user });
     } catch (error) {
       return res.status(500).json({ success: false, error: error.message });
     }

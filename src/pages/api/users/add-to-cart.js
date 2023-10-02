@@ -4,13 +4,15 @@ import User from '../../../models/users';
 export default async (req, res) => {
   await dbUtils.connectToDatabase();
 
-  if (req.method === 'GET') {
+  if (req.method === 'PUT') {
     try {
-      const {productId,userId} = req.body.userId; 
-      console.log(productId,userId);
+      const {productId,userId} = req.body; 
       const user = await User.findById(userId);
-      const selectedProducts = await user.selectedProducts.push({productId});
-      return res.status(200).json(selectedProducts);
+      // console.log(user);
+      await user.selectedProducts.push(productId);
+      await user.save();
+      // console.log(user.selectedProducts);
+      return res.status(200).json(user.selectedProducts);
     } catch (error) {
       return res.status(500).json({ success: false, error: error.message });
     }
