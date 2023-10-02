@@ -25,7 +25,7 @@ export const authMiddleware = (req, res, next) => {
     return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
 
-  jwt.verify(token, 'your-secret-key', (err, decoded) => {
+  jwt.verify(token, 'jaadu', (err, decoded) => {
     if (err) {
       return res.status(401).json({ success: false, message: 'Unauthorized' });
     }

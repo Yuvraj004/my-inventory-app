@@ -1,10 +1,10 @@
-import connectToDatabase from '../../../utils/db';
+import dbUtils from '../../../utils/db';
 import Product from '../../../models/products';
+import { authMiddleware } from '@/utils/auth';
+export default authMiddleware(async (req, res) => {
+  await dbUtils.connectToDatabase();
 
-export default async (req, res) => {
-  await connectToDatabase();
-
-  if (req.method === 'POST') {
+  if (req.method === 'PUT') {
     const { productId, vendorId, approve } = req.body;
 
     try {
@@ -26,4 +26,4 @@ export default async (req, res) => {
   } else {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
-};
+});

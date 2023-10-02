@@ -13,7 +13,7 @@
   align-items: center;
   width: 18rem;
   margin-top: -70px;
-  /* border: 2px solid #333; */
+  border: 2px solid #333;
 }
 .lock {
   width: 100px;

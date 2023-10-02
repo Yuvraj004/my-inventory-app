@@ -19,8 +19,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimate(true);
-      setTimeout(() => setAnimate(false), 50);
-
+      // setTimeout(() => setAnimate(false), 100);
       seti(prevCount => (prevCount < 9 ? prevCount + 1 : 0));
       setj(prevCount => (prevCount < 9 ? prevCount + 1 : 0));
       setk(prevCount => (prevCount < 9 ? prevCount + 1 : 0));
@@ -31,7 +30,7 @@ export default function Home() {
           router.push('/components/login');
         }
       });
-    }, 100);
+    }, 500);
 
     return () => clearInterval(interval);
   }, []);

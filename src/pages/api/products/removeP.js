@@ -1,15 +1,15 @@
-import connectToDatabase from '../../../utils/db';
+import dbUtils from '../../../utils/db';
 import Product from '../../../models/products';
 import { authMiddleware } from '../../../utils/auth';
 
 const removeProduct = authMiddleware(async (req, res) => {
-  await connectToDatabase();
+  await dbUtils.connectToDatabase();
 
   if (req.method === 'DELETE') {
     const { id } = req.query;
 
     try {
-      const removedProduct = await Product.findByIdAndRemove(id);
+      const removedProduct = await Product.findByIdAndDelete(id);
 
       if (!removedProduct) {
         return res.status(404).json({ success: false, message: 'Product not found' });

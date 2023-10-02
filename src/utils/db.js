@@ -12,7 +12,7 @@ async function connectToDatabase() {
   const db = mongoose.connection;
   db.on("error", console.error.bind(console, "MongoDB connection error:"));
 }
-export async function getCollection(collectionName) {
+async function getCollection(collectionName) {
   const db = await connectToDatabase();
   // console.log(db);
   return db.collection(collectionName);

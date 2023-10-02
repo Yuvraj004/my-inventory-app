@@ -1,0 +1,15 @@
+1. middlware to store userid /vendor id
+2. login ->productdisplay -> select product ->add to cart on user page ->
+verification by vendor->
+remove from cart -> add to order -> track order
+3.storing user id somewhere so that it can be used to add the selected products or order to its profile
+4. logout : removing that stored user
+5. productdisplay : all products using the product model option of selection
+6. selecting products which are added to the cart
+7. user profile contains the cart and the navbar which displays cart ,orders
+8. when a product is selected the vendor receives an alert to review the 
+product.
+9. vendor logs in checksout the availability and approves the product.
+10. vendor profile : add a product,delete a product, review a product.
+11. tracking of product?
+

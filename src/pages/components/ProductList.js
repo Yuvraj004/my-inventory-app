@@ -1,7 +1,10 @@
+"use client";
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import jwt_decode from 'jwt-decode';
 const ProductList = () => {
+  
+
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [userId, setUserId] = useState(''); // Add a state for the user ID
@@ -15,6 +18,13 @@ const ProductList = () => {
     };
 
     fetchProducts();
+    const token = sessionStorage.getItem('token');
+
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.userId;
+      setUserId(userId);
+    }
   }, []);
 
   const handleSelectProduct = async (productId) => {
