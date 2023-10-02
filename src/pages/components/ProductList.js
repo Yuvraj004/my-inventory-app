@@ -2,13 +2,17 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
+import { useRouter } from 'next/router';
 const ProductList = () => {
-  
-
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [userId, setUserId] = useState(''); // Add a state for the user ID
+  const router = useRouter();
 
+  const handleLogout = () => {
+    localStorage.clear('token');
+    router.push('/login');
+  };
   useEffect(() => {
     // Simulated API call to fetch products
     const fetchProducts = async () => {
@@ -41,19 +45,30 @@ const ProductList = () => {
   };
 
   return (
-    <div>
-      <h2>Product List</h2>
-      {products.map(product => (
-        <div key={product._id}>
-          <h3>{product.name}</h3>
-          <p>{product.description}</p>
-          <button onClick={() => handleSelectProduct(product._id)}>Select</button>
-        </div>
-      ))}
-      <div className='link'>
-        <Link href="/components/user/UserProfile"> GO TO YOUR PROFILE</Link>
+    <>
+      <nav className='navbar'>
+        
+        <Link className='productbtn' href='/components/products/ProductList' style={{"textDecoration":"none","textAlign":"center","alignItems":"center"}}>
+          Products Page
+        </Link>
+        <Link className='productbtn' href={`/components/user/UserProfile`} style={{"textDecoration":"none"}}>
+          Go to Your Profile
+        </Link>
+        <button className='productbtn' onClick={handleLogout}>
+          Logout
+        </button>
+      </nav>
+      <h2><center>Product List</center></h2>
+      <div className='productsList' >
+        {products.map(product => (
+          <div className='productCard' key={product._id}>
+            <h3>{product.name}</h3>
+            <p>Description:<p></p>{product.description}</p>
+            <button onClick={() => handleSelectProduct(product._id)}>Select</button>
+          </div>
+        ))}
       </div>
-    </div>
+    </>
   );
 };
 

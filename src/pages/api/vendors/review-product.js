@@ -5,9 +5,9 @@ export default authMiddleware(async (req, res) => {
   await dbUtils.connectToDatabase();
 
   if (req.method === 'PUT') {
-    const { productId, vendorId, approve } = req.body;
 
     try {
+      const { productId, approve,selectedUserId } = req.body;
       const product = await Product.findById(productId);
 
       if (!product) {
@@ -16,7 +16,7 @@ export default authMiddleware(async (req, res) => {
 
       // Update approval status and vendor who reviewed
       product.approved = approve;
-      product.vendorReviewed = vendorId;
+      product.selectedUserId = selectedUserId;
       await product.save();
 
       return res.status(200).json({ success: true, message: 'Product reviewed successfully' });

@@ -7,6 +7,7 @@ const ProductSchema = new mongoose.Schema({
   quantity: Number,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   approved: { type: Boolean, default: false },
+  selectedUserId :{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'Vendor' },
   createdAt: { type: Date, default: Date.now }
 });

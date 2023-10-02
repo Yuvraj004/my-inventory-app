@@ -7,6 +7,7 @@ import { getVendorProducts, createProduct, deleteProduct, reviewUserSelectedProd
 const VendorDashboard = () => {
   const [products, setProducts] = useState([]);
   const [newProductData, setNewProductData] = useState({});
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -65,9 +66,20 @@ const VendorDashboard = () => {
               <div key={product._id}>
                 <p>{product.name}</p>
                 <p>{product.descrption}</p>
-                <p>{product.user && product.user.map((us)=>{
-                  <li>{us}</li>
-                }) }</p>
+                <div>
+                  {products.users && product.users.map((user) => (
+                    <label key={user._id}>
+                      <input
+                        type="radio"
+                        name="selectedUser"
+                        value={user._id}
+                        checked={selectedUserId === user._id}
+                        onChange={() => setSelectedUserId(user._id)}
+                      />
+                      {user.name}
+                    </label>
+                  ))}
+                </div>
                 <button onClick={() => handleReviewProduct(product._id,product.approved)}>Approve</button>
               </div>
             );

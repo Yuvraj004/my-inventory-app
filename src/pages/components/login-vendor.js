@@ -44,7 +44,7 @@ const login = () => {
 
       if (response.ok) {
         toast.success('Login successful!');
-        router.push('/components/products/buyProduct');
+        router.push('/components/vendor/VendorDashboard');
       } else {
         const data = await response.json();
         toast.error(`Login failed: ${data.message}`);

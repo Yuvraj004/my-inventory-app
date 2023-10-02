@@ -1,10 +1,10 @@
-const trackProduct = async (userId, productId, action) => {
+const trackProduct = async (userId, productId, status) => {
     const response = await fetch('/api/users/track-product', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userId, productId, action }),
+      body: JSON.stringify({ userId, productId, status }),
     });
   
     if (!response.ok) {

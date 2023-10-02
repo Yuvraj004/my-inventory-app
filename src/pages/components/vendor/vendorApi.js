@@ -45,7 +45,7 @@ export const getVendorProducts = async () => {
   };
   
   // Function to review a user-selected product
-  export const reviewUserSelectedProduct = async (productId, approved) => {
+  export const reviewUserSelectedProduct = async (productId, approved,selectedUserId) => {
     const response = await fetch(`/api/vendors/review-product/${productId}`, {
       method: 'PUT',
       headers: {
@@ -53,9 +53,9 @@ export const getVendorProducts = async () => {
         'authorization':`Bearer ${sessionStorage.getItem('token')}`,
         // Add any authentication headers if required
       },
-      body: JSON.stringify({ approved:~approved }), // Assuming the API expects an 'approved' field
+      body: JSON.stringify({ approved:~approved,selectedUserId:selectedUserId }), 
     });
     const data = await response.json();
-    return data; // Assuming the response includes relevant information about the reviewed product
-  };
+    return data;
+  }
   

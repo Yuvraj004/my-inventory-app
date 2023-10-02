@@ -1,8 +1,8 @@
-import connectToDatabase from '../../../utils/db';
+import dbUtils from '../../../utils/db';
 import User from '../../../models/users';
 
 export default async (req, res) => {
-  await connectToDatabase();
+  await dbUtils.connectToDatabase();
 
   if (req.method === 'POST') {
     const { userId, productId, action } = req.body;

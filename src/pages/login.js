@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import "../../styles/login.css";
-import img from "../../../public/img-01.png";
+import "../styles/login.css";
+import img from "../../public/img-01.png";
 import { useRouter } from 'next/router';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,7 +39,7 @@ const login = () => {
 
       if (response.ok) {
         toast.success('Login successful!');
-        router.push('/mainpage');
+        router.push('/produtsPage');
       } else {
         const data = await response.json();
         toast.error(`Login failed: ${data.message}`);
