@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { getVendorProducts, createProduct, deleteProduct, reviewUserSelectedProduct } from './vendorApi';
+import { useRouter } from 'next/router';
 import '../../../styles/userProf.css';
 import '../../../styles/vendorDash.css';
 
@@ -15,7 +16,13 @@ const VendorDashboard = () => {
     quantity: 0,
   });
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const router = useRouter();
+  const handleLogout = () => {
 
+    localStorage.clear('token');
+    localStorage.clear('vendorId');
+    router.push('/login-vendor');
+  };
   useEffect(() => {
     const fetchProducts = async () => {
       const data = await getVendorProducts();
@@ -44,8 +51,14 @@ const VendorDashboard = () => {
   };
 
   return (
-    <div style={{display:"flex",alignItems:"center",flexDirection:"column"}}>
-      <h2>Vendor Dashboard</h2>
+    <div style={{display:"flex",alignItems:"center",flexDirection:"column",justifyContent:"space-between"}}>
+      <nav className='navbar'>
+        <h2>Vendor Dashboard</h2>
+        <button className='logoutbtn btn' onClick={handleLogout}>
+          Logout
+        </button>
+      </nav>
+      &nbsp;
       <div className='createProduct'>
         <h3>Create New Product</h3>
         <div className='inputGroup'>
