@@ -70,7 +70,7 @@ const login = () => {
 
         <div className='container'>
           <span className='title'><h2><b>Vendor Login</b></h2></span>
-          <span>For Users: <Link href="/components/login" style={{ textDecoration: 'none' }}>Member Login</Link></span>
+          <span>For Users: <Link href="/login" style={{ textDecoration: 'none' }}>Member Login</Link></span>
           <form onSubmit={handleSubmit}>
             <div className='row' data-validate="input is required">
               <span className='symbol'>
